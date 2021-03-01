@@ -1,5 +1,6 @@
 import { JobIndexParams, JobIndexService } from "api/services/JobIndexService"
-import { intArg, nonNull, queryType } from "nexus"
+import { ShowJobService, ShowJobParams } from "api/services/ShowJobService"
+import { intArg, queryType, stringArg } from "nexus"
 import { Job, JobIndexResult } from "./types/job"
 
 export const Query = queryType({
@@ -9,10 +10,21 @@ export const Query = queryType({
       args: {
         page: intArg()
       },
-      async resolve(_, args) {
-        const jobs = await JobIndexService(args as JobIndexParams)
+      async resolve(_, { page }) {
+        const jobs = await JobIndexService({ page: page || 0 })
 
         return jobs
+      }
+    }),
+    t.field('job', {
+      type: Job,
+      args: {
+        id: stringArg()
+      },
+      async resolve(_, args) {
+        const job = await ShowJobService(args as ShowJobParams)
+
+        return job
       }
     })
   }

@@ -21,5 +21,6 @@ type JobIndexResult {
 }
 
 type Query {
+  job(id: String): Job
   jobs(page: Int): JobIndexResult
 }

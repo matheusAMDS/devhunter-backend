@@ -75,6 +75,7 @@ export interface NexusGenFieldTypes {
     page: number | null; // Int
   }
   Query: { // field return type
+    job: NexusGenRootTypes['Job'] | null; // Job
     jobs: NexusGenRootTypes['JobIndexResult'] | null; // JobIndexResult
   }
 }
@@ -97,12 +98,16 @@ export interface NexusGenFieldTypeNames {
     page: 'Int'
   }
   Query: { // field return type name
+    job: 'Job'
     jobs: 'JobIndexResult'
   }
 }
 
 export interface NexusGenArgTypes {
   Query: {
+    job: { // args
+      id?: string | null; // String
+    }
     jobs: { // args
       page?: number | null; // Int
     }
