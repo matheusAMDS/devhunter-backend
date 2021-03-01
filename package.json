@@ -1,5 +1,5 @@
 {
-  "name": "devjobs-workers",
+  "name": "devhunter-backend",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -8,7 +8,6 @@
     "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts"
   },
   "dependencies": {
-    "@octokit/core": "^3.2.5",
     "@prisma/client": "2.17.0",
     "apollo-server-express": "^2.21.0",
     "axios": "^0.21.1",
