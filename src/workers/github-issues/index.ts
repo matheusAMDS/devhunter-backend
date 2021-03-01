@@ -1,7 +1,7 @@
 import axios from "axios"
 import { Job, RepoIssue, RepoInfo } from "./types"
 import repos from "./repositories.json"
-import getMatchedRegex from "utils/getMatchedRegex"
+import getMatchedRegex from "../utils/getMatchedRegex"
 
 const api = axios.create({
   baseURL: "https://api.github.com/repos"

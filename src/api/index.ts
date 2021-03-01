@@ -1,9 +1,13 @@
-import { Router } from "express"
+import { ApolloServer } from "apollo-server-express"
+import express from "express"
 
-const router = Router()
+import schema from "./schema"
 
-router.get("/", (req, res) => {
-  return res.json({ message: "Hello World" })
+const app = express()
+const server = new ApolloServer({
+  schema
 })
 
-export default router
+server.applyMiddleware({ app })
+
+export default app
