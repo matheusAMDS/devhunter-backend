@@ -11,6 +11,8 @@ export async function ShowJobService(params: ShowJobParams) {
       id: params.id 
     }
   })
+
+  await client.$disconnect()
   
   if (data) {
     const job = {

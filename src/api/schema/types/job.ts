@@ -19,7 +19,13 @@ export const Job = objectType({
     t.string('company_logo')
     t.string('location')
     t.string('work_regime')
-    t.list.string('tags')
-    t.int('created_at')
+    t.list.string('tags', {
+      resolve(root) {
+        const tags = root.tags?.toString().split(',')
+        
+        return tags as string[]
+      }
+    })
+    t.field('created_at', { type: "DateTime" })
   }
 })

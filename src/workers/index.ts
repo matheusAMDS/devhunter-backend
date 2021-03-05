@@ -40,6 +40,8 @@ export function StartCron(): void {
         })
       })
       console.log("Fetched all available jobs with success!")
+
+      await client.$disconnect()
     } catch (error) {
       console.log("Unable to fetch jobs")
       console.log(error)

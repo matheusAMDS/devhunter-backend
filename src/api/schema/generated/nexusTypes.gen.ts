@@ -4,9 +4,23 @@
  */
 
 
-
-
-
+import { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    datetime<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    datetime<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
+  }
+}
 
 
 declare global {
@@ -25,6 +39,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  DateTime: DateTime
 }
 
 export interface NexusGenObjects {
@@ -32,11 +47,10 @@ export interface NexusGenObjects {
     company?: string | null; // String
     company_logo?: string | null; // String
     company_url?: string | null; // String
-    created_at?: number | null; // Int
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     id?: string | null; // ID
     location?: string | null; // String
-    tags?: Array<string | null> | null; // [String]
     title?: string | null; // String
     work_regime?: string | null; // String
   }
@@ -62,7 +76,7 @@ export interface NexusGenFieldTypes {
     company: string | null; // String
     company_logo: string | null; // String
     company_url: string | null; // String
-    created_at: number | null; // Int
+    created_at: NexusGenScalars['DateTime'] | null; // DateTime
     description: string | null; // String
     id: string | null; // ID
     location: string | null; // String
@@ -85,7 +99,7 @@ export interface NexusGenFieldTypeNames {
     company: 'String'
     company_logo: 'String'
     company_url: 'String'
-    created_at: 'Int'
+    created_at: 'DateTime'
     description: 'String'
     id: 'ID'
     location: 'String'
@@ -109,7 +123,9 @@ export interface NexusGenArgTypes {
       id?: string | null; // String
     }
     jobs: { // args
+      location?: string | null; // String
       page?: number | null; // Int
+      tech?: string | null; // String
     }
   }
 }

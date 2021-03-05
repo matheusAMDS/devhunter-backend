@@ -8,10 +8,16 @@ export const Query = queryType({
     t.field('jobs', {
       type: JobIndexResult,
       args: {
-        page: intArg()
+        page: intArg(),
+        location: stringArg(),
+        tech: stringArg()
       },
-      async resolve(_, { page }) {
-        const jobs = await JobIndexService({ page: page || 0 })
+      async resolve(_, { page, tech, location }) {
+        const jobs = await JobIndexService({ 
+          page: page || 0,
+          tech: tech as string,
+          location: location as string
+        })
 
         return jobs
       }
