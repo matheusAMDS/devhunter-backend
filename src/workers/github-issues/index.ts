@@ -60,8 +60,6 @@ function convertIssueToJob(issue: RepoIssue): Job | null {
       title: title.trim(),
       location: location.trim(),
       company: company.trim(),
-      company_logo: null,
-      company_url: null,
       description: issue.body,
       created_at: issue.created_at,
       tags: issue.labels.map(label => label.name),

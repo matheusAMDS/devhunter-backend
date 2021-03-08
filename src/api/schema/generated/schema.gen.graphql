@@ -9,8 +9,6 @@ scalar DateTime
 
 type Job {
   company: String
-  company_logo: String
-  company_url: String
   created_at: DateTime
   description: String
   id: ID

@@ -30,8 +30,6 @@ export interface Job {
   id: string 
   created_at: Date 
   company: string 
-  company_url: string | null 
-  company_logo: string | null 
   location: string 
   title: string 
   description: string 

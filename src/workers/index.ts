@@ -1,22 +1,18 @@
-import { PrismaClient } from "@prisma/client"
+import Job from "models/Job"
+import CronCall from "models/CronCall"
 import cron from "node-cron"
 
 import { getAvailableJobs } from "./github-issues"
 
 export function StartCron(): void {
-  cron.schedule("0 * * * *", async () => {
+  cron.schedule("16 * * * *", async () => {
     try {
       console.log("Start fetching jobs...")
-      const client = new PrismaClient()
-      const lastCall = await client.cronCall.findFirst({ 
-        orderBy: {
-          called_at: 'desc'
-        }
-      })
+      const lastCall = await CronCall.findOne({}).sort({ created_at: -1 })
       let searchedJobs
       
       if (lastCall) {
-        searchedJobs = await getAvailableJobs(lastCall.called_at)
+        searchedJobs = await getAvailableJobs(lastCall.createdAt as Date)
       } else {
         const newDate = new Date()
         const day = newDate.getDate()
@@ -27,21 +23,26 @@ export function StartCron(): void {
         searchedJobs = await getAvailableJobs(since)
       }
   
-      await client.cronCall.create({
-        data: {}
-      })
-      searchedJobs.forEach(async job => {
-        await client.job.create({
-          data: {
-            ...job,
-            id: undefined,
-            tags: job.tags.toString()
-          }
-        })
-      })
-      console.log("Fetched all available jobs with success!")
+      await CronCall.create({})
 
-      await client.$disconnect()
+      for (const job of searchedJobs) {
+        const newJob = new Job({
+          company: job.company,
+          description: job.description,
+          location: job.location,
+          created_at: new Date(job.created_at),
+          tags: [],
+          title: job.title,
+          work_regime: job.work_regime
+        })
+
+        job.tags.map(tag => {
+          newJob.tags.push(tag)
+        })
+
+        await newJob.save()
+      }
+      console.log("Fetched all available jobs with success!")
     } catch (error) {
       console.log("Unable to fetch jobs")
       console.log(error)

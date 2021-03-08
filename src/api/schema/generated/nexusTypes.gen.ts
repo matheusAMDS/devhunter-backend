@@ -45,12 +45,11 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Job: { // root type
     company?: string | null; // String
-    company_logo?: string | null; // String
-    company_url?: string | null; // String
     created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     id?: string | null; // ID
     location?: string | null; // String
+    tags?: Array<string | null> | null; // [String]
     title?: string | null; // String
     work_regime?: string | null; // String
   }
@@ -74,8 +73,6 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   Job: { // field return type
     company: string | null; // String
-    company_logo: string | null; // String
-    company_url: string | null; // String
     created_at: NexusGenScalars['DateTime'] | null; // DateTime
     description: string | null; // String
     id: string | null; // ID
@@ -97,8 +94,6 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Job: { // field return type name
     company: 'String'
-    company_logo: 'String'
-    company_url: 'String'
     created_at: 'DateTime'
     description: 'String'
     id: 'ID'
