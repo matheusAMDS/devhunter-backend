@@ -12,6 +12,9 @@
     "baseUrl": "./src",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "paths": {
+      "repositories": ["../repositories.json"]
+    }
   }
 }

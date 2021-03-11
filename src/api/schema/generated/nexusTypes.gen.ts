@@ -48,9 +48,11 @@ export interface NexusGenObjects {
     created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     id?: string | null; // ID
+    issue_id?: string | null; // String
     location?: string | null; // String
     tags?: Array<string | null> | null; // [String]
     title?: string | null; // String
+    updated_at?: NexusGenScalars['DateTime'] | null; // DateTime
     work_regime?: string | null; // String
   }
   JobIndexResult: { // root type
@@ -76,9 +78,11 @@ export interface NexusGenFieldTypes {
     created_at: NexusGenScalars['DateTime'] | null; // DateTime
     description: string | null; // String
     id: string | null; // ID
+    issue_id: string | null; // String
     location: string | null; // String
     tags: Array<string | null> | null; // [String]
     title: string | null; // String
+    updated_at: NexusGenScalars['DateTime'] | null; // DateTime
     work_regime: string | null; // String
   }
   JobIndexResult: { // field return type
@@ -97,9 +101,11 @@ export interface NexusGenFieldTypeNames {
     created_at: 'DateTime'
     description: 'String'
     id: 'ID'
+    issue_id: 'String'
     location: 'String'
     tags: 'String'
     title: 'String'
+    updated_at: 'DateTime'
     work_regime: 'String'
   }
   JobIndexResult: { // field return type name

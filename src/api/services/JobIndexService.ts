@@ -28,7 +28,7 @@ export async function JobIndexService(params: JobIndexParams) {
     query.location = location
 
   const jobs = await Job
-    .find(query)
+    .find({ ...query, open: true })
     .sort({ created_at: -1 })
     .skip(page * PAGE_SIZE)
     .limit(PAGE_SIZE)
