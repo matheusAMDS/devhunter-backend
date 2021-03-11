@@ -27,11 +27,12 @@ export interface RepoIssue {
 }
 
 export interface Job {
-  id: string 
+  //id: readonly string 
+  issue_id: string
   created_at: Date 
+  updated_at: Date
+  open: boolean
   company: string 
-  company_url: string | null 
-  company_logo: string | null 
   location: string 
   title: string 
   description: string 

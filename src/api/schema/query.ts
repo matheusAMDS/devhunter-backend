@@ -15,7 +15,7 @@ export const Query = queryType({
       async resolve(_, { page, tech, location }) {
         const jobs = await JobIndexService({ 
           page: page || 0,
-          tech: tech as string,
+          tech: tech?.split(','),
           location: location as string
         })
 

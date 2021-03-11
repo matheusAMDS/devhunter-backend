@@ -10,9 +10,11 @@
     "esModuleInterop": true,                  
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "./src",
-    /* "paths": {
-      "@api/*.ts": ["api/*.ts"],
-      "@workers/*.ts": ["workers/*.ts"]
-    } */
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "paths": {
+      "repositories": ["../repositories.json"]
+    }
   }
 }

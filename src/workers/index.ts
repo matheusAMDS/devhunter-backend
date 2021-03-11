@@ -1,47 +1,35 @@
-import { PrismaClient } from "@prisma/client"
 import cron from "node-cron"
 
+import Job from "models/Job"
+import CronCall from "models/CronCall"
 import { getAvailableJobs } from "./github-issues"
+import { generateTodayDate } from "workers/utils"
 
 export function StartCron(): void {
-  cron.schedule("0 * * * *", async () => {
+  cron.schedule("43 * * * *", async () => {
     try {
       console.log("Start fetching jobs...")
-      const client = new PrismaClient()
-      const lastCall = await client.cronCall.findFirst({ 
-        orderBy: {
-          called_at: 'desc'
-        }
-      })
+      const lastCall = await CronCall.findOne({}).sort({ created_at: -1 })
       let searchedJobs
       
-      if (lastCall) {
-        searchedJobs = await getAvailableJobs(lastCall.called_at)
-      } else {
-        const newDate = new Date()
-        const day = newDate.getDate()
-        const month = newDate.getMonth() + 1
-        const year = newDate.getFullYear()
-        const since = new Date(`${month}/${day}/${year}`)
-        
+      if (lastCall) 
+        searchedJobs = await getAvailableJobs(lastCall.createdAt as Date)
+      else {
+        const since = generateTodayDate()
+
         searchedJobs = await getAvailableJobs(since)
       }
   
-      await client.cronCall.create({
-        data: {}
-      })
-      searchedJobs.forEach(async job => {
-        await client.job.create({
-          data: {
-            ...job,
-            id: undefined,
-            tags: job.tags.toString()
-          }
-        })
-      })
-      console.log("Fetched all available jobs with success!")
+      await CronCall.create({})
 
-      await client.$disconnect()
+      for (const job of searchedJobs) {
+        await Job.findOneAndUpdate(
+          { issue_id: job.issue_id}, 
+          job, 
+          { upsert: true }
+        )
+      }
+      console.log("Fetched all available jobs with success!")
     } catch (error) {
       console.log("Unable to fetch jobs")
       console.log(error)

@@ -1,7 +1,7 @@
 import axios from "axios"
 import { Job, RepoIssue, RepoInfo } from "./types"
-import repos from "./repositories.json"
-import getMatchedRegex from "../utils/getMatchedRegex"
+import repos from "repositories"
+import { getMatchedRegex } from "workers/utils"
 
 const api = axios.create({
   baseURL: "https://api.github.com/repos"
@@ -22,13 +22,8 @@ async function getDataByIssues(repos: RepoInfo[], since: Date) {
 
   responses.forEach(response => {
     const data = response.data
-    const filteredData = data.filter(issue => {
-      const createdAt = new Date(issue.created_at)
 
-      return createdAt.getTime() > since.getTime()
-    })
-
-    totalData = totalData.concat(filteredData)
+    totalData = totalData.concat(data)
   })
 
   return totalData
@@ -56,16 +51,16 @@ function convertIssueToJob(issue: RepoIssue): Job | null {
   
   if (title && company && location && workRegime) {
     return {
-      id: String(issue.id),
+      issue_id: String(issue.id),
       title: title.trim(),
       location: location.trim(),
       company: company.trim(),
-      company_logo: null,
-      company_url: null,
       description: issue.body,
       created_at: issue.created_at,
       tags: issue.labels.map(label => label.name),
-      work_regime: workRegime.name
+      work_regime: workRegime.name,
+      updated_at: issue.updated_at,
+      open: issue.state === 'open'
     }
   } else {
     return null

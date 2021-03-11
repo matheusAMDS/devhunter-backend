@@ -9,14 +9,14 @@ scalar DateTime
 
 type Job {
   company: String
-  company_logo: String
-  company_url: String
   created_at: DateTime
   description: String
   id: ID
+  issue_id: String
   location: String
   tags: [String]
   title: String
+  updated_at: DateTime
   work_regime: String
 }
 

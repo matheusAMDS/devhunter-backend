@@ -4,7 +4,7 @@ interface Params {
   groups?: number 
 }
 
-export default function getMatchedRegex(params: Params): string | null {
+export function getMatchedRegex(params: Params): string | null {
   const { regex, str, groups } = params
   const matchedRegex = str.match(regex)
   let match: string
