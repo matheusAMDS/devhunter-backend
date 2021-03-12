@@ -1,9 +1,9 @@
 import cron from "node-cron"
 
-import Job from "models/Job"
-import CronCall from "models/CronCall"
+import Job from "../models/Job"
+import CronCall from "../models/CronCall"
 import { getAvailableJobs } from "./github-issues"
-import { generateTodayDate } from "workers/utils"
+import { generateTodayDate } from "./utils"
 
 export function StartCron(): void {
   cron.schedule("30 * * * *", async () => {

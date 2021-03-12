@@ -1,8 +1,9 @@
 import "dotenv/config"
-import { StartCron } from "workers"
-import app from "api"
-import { PORT, DATABASE_URL } from "config"
 import mongoose from "mongoose"
+
+import { StartCron } from "./workers"
+import app from "./api"
+import { PORT, DATABASE_URL } from "./config"
 
 mongoose.connect(DATABASE_URL, {
   useFindAndModify: false,

@@ -1,5 +1,5 @@
-import { JobIndexParams, JobIndexService } from "api/services/JobIndexService"
-import { ShowJobService, ShowJobParams } from "api/services/ShowJobService"
+import { JobIndexParams, JobIndexService } from "../services/JobIndexService"
+import { ShowJobService, ShowJobParams } from "../services/ShowJobService"
 import { intArg, queryType, stringArg } from "nexus"
 import { Job, JobIndexResult } from "./types/job"
 

@@ -4,17 +4,13 @@
     "module": "commonjs",                     
     "lib": ["esnext"],                       
     "sourceMap": true,                     
-    "outDir": "dist",                        
+    "outDir": "dist",
     "strict": true,                           
     "resolveJsonModule": true,
     "esModuleInterop": true,                  
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "./src",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
-    "paths": {
-      "repositories": ["../repositories.json"]
-    }
   }
 }

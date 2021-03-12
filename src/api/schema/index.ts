@@ -1,6 +1,6 @@
 import { makeSchema } from "nexus"
 import path from "path"
-import { NODE_ENV } from "config"
+import { NODE_ENV } from "../../config"
 
 import { Query } from "./query"
 import * as types from "./types"
