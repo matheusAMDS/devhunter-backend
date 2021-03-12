@@ -6,7 +6,7 @@ import { getAvailableJobs } from "./github-issues"
 import { generateTodayDate } from "workers/utils"
 
 export function StartCron(): void {
-  cron.schedule("43 * * * *", async () => {
+  cron.schedule("30 * * * *", async () => {
     try {
       console.log("Start fetching jobs...")
       const lastCall = await CronCall.findOne({}).sort({ created_at: -1 })
