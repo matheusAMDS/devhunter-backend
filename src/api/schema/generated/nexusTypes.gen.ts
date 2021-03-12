@@ -39,6 +39,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  //@ts-ignore
   DateTime: DateTime
 }
 

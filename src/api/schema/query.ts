@@ -12,6 +12,7 @@ export const Query = queryType({
         location: stringArg(),
         tech: stringArg()
       },
+      //@ts-ignore
       async resolve(_, { page, tech, location }) {
         const jobs = await JobIndexService({ 
           page: page || 0,
@@ -27,6 +28,7 @@ export const Query = queryType({
       args: {
         id: stringArg()
       },
+      //@ts-ignore
       async resolve(_, args) {
         const job = await ShowJobService(args as ShowJobParams)
 
